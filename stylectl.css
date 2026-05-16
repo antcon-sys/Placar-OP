@@ -1,0 +1,232 @@
+/* Estilo Controle Placar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: "Roboto", sans-serif;
+    background: #013c4e;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    width: 100vw;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cabecalho-placar {
+    display: flex;
+    width: 100%;
+}
+
+#tab-config-placar,
+.tab-config-menu {
+    display: block;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 60%;
+    margin: 5px auto;
+    text-align: center;
+}
+
+.placar-set {
+    display: block;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.time-box {
+    display: inline-block;
+    width: 45%;
+}
+
+button {
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.button-end {
+    margin: 5px 12px;
+}
+
+.btn-gols {
+    background: #007bff;
+    color: white;
+    width: 60px;
+    font-size: 35px;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    width: 60px;
+    font-size: 35px;
+}
+
+.btn-start {
+    background: #28a745;
+    color: white;
+    width: 100%;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+input {
+    width: 90%;
+    font-size: 16px;
+    padding: 8px;
+    margin: 5px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.button-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-bottom: 3px solid #E65100;
+    border-right: 3px solid #E65100;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 12px;
+}
+
+.btn-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e68507;
+    color: white;
+    width: 25%;
+    font-size: 22px;
+    margin: 5px 12px;
+    font-weight: bold;
+}
+
+#div4 {
+    background: whitesmoke;
+    color: #000;
+}
+
+hr {
+    margin: 3px auto;
+}
+
+.label-button {
+    display: flex;
+    justify-content: row;
+    gap: 10px;
+    align-items: center;
+    margin: 15px 10px;
+}
+
+.move-score-casa,
+.move-score-visitante {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto;
+    width: 40%;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 5px 14px;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 80%;
+}
+
+#tempoJogo {
+    width: 40%;
+    height: auto;
+    font-size: 16px;
+}
+
+#nomeTimeA,
+#nomeTimeB {
+    font-size: 22px;
+    width: 90%;
+    padding: 5px 0;
+}
+
+#golsAA,
+#golsBB {
+    font-size: 35px;
+    width: 50%;
+    margin: 10px 10px;
+}
+
+#displayCronometro {
+    font-size: 80px;
+    margin: 5px 0;
+    color: #333;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    opacity: 0.5;
+}
+
+@media screen and (max-width: 1075px) {
+
+    #tab-config-placar,
+    .tab-config-menu {
+        max-width: 95%;
+    }
+
+    .button-menu {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        max-width: 100%;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .btn-menu {
+        display: block;
+        align-items: center;
+        justify-content: center;
+        font-size: 95%;
+        width: 92%;
+    }
+
+    .placar-set {
+        flex-direction: column;
+    }
+
+    .time-box {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    #displayCronometro {
+        font-size: 60px;
+    }
+
+    .label-button {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}

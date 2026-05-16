@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="./overinformes.html"></script>
+    <title>Informações EOP</title>
+
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+        background: #013c4e;
+       
+    }
+
+    .geral-infor {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 15px;
+         text-transform: uppercase;
+    }
+
+    h3 {
+        color: #555;
+        margin: 12px 0;
+        align-items: center;
+        justify-content: center;
+         text-transform: uppercase;
+    }
+
+    .infor-title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+
+    }
+
+    .form-infor {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .form-infor form {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 95%;
+    }
+
+    .form-infor form label,
+    .infor-title label {
+        font-weight: bold;
+        color: #555;
+        font-size: 1.1em;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="submit"] {
+        padding: 10px;
+        font-size: 1.5em;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    textarea {
+        width: 100%;
+        height: 120px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<body>
+    <div class="geral-infor">
+        <h1>Controle de Informações</h1>
+
+        <div class="infor-title">
+            <label for="situacaoJogo">Escolha a situação do jogo:</label>
+            <select name="situacao_jogo" id="situacao-jogo" oninput="updateJogos()">
+                <option value="">Selecione ...</option>
+                <option value="Em Instantes">Em Instantes</option>
+                <option value="Pré Jogo">Pré Jogo</option>
+                <option value="Intervalo">Intervalo</option>
+                <option value="Parada Técnica / Hidratação">Parada Técnica</option>
+                <option value="Jogo Encerrado">Jogo Encerrado</option>
+            </select>
+        </div>
+
+        <div class="form-infor">
+            <h3>Informações do Jogo</h3>
+            <form>
+                <label for="competition">Competição:</label>
+                <input type="text" id="competition" name="competicao" placeholder="Digite o nome da competição"
+                    oninput="updateJogos()">
+                <label for="fases">Fase:</label>
+                <input type="text" id="fases" name="fase" placeholder="Digite a fase da competição"
+                    oninput="updateJogos()">
+                <label for="stadio">Estádio:</label>
+                <input type="text" id="stadio" name="estadio" placeholder="Digite o nome do estádio"
+                    oninput="updateJogos()">
+                <label for="city">Cidade:</label>
+                <input type="text" id="city" name="cidade" placeholder="Digite o nome da cidade"
+                    oninput="updateJogos()">
+
+                <input type="submit" value="Enviar">
+            </form>
+
+            <h3>Descreva situações do jogo:</h3>
+            <textarea name="informes-text" id="texto-informes" placeholder="Digite os informes do jogo..."
+                oninput="updateJogos()"></textarea>
+
+        </div>
+
+        <div>
+            <label for="nome-times">Nome dos Times:
+                <input type="text" id="nome-timeA" placeholder="Time A">
+                <input type="text" id="nome-timeB" placeholder="Time B">
+            </label>
+        </div>
+    </div>
+
+</body>
+
+<script>
+
+    // --- SUA CONFIGURAÇÃO MANTIDA ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyCHKTA-mgIuWcVypfDkGrNhxtsynrUtq1Y",
+        authDomain: "placar-live-53cc0.firebaseapp.com",
+        projectId: "placar-live-53cc0",
+        databaseURL: "https://placar-live-53cc0-default-rtdb.firebaseio.com",
+        storageBucket: "placar-live-53cc0.firebasestorage.app",
+        messagingSenderId: "291622264576",
+        appId: "1:291622264576:web:1ca81d1333e4b0cb7b1de5",
+        measurementId: "G-ZJPHJ42ECV"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let inforJogo = {
+        sjogo: "Em Instantes ...",
+        compet: "Cachoeirano 2026",
+        fase: "Final",
+        estadio: "Estádio Municipal",
+        cidade: "Cachoeira /BA",
+        informes: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    };
+
+    db.ref('informesJogo').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            inforJogo = data;
+            document.getElementById('situacao-jogo').value = inforJogo.sjogo;
+            document.getElementById('competition').value = inforJogo.compet;
+            document.getElementById('fases').value = inforJogo.fase;
+            document.getElementById('stadio').value = inforJogo.estadio;
+            document.getElementById('city').value = inforJogo.cidade;
+            document.getElementById('texto-informes').value = inforJogo.informes;
+        }
+    });
+
+    function sync() { db.ref('informesJogo').set(inforJogo); }
+
+    function updateJogos() {
+        inforJogo.sjogo = document.getElementById('situacao-jogo').value || "Em Instantes ...";
+        inforJogo.compet = document.getElementById('competition').value || "Cachoeirano 2026";
+        inforJogo.fase = document.getElementById('fases').value || "Final";
+        inforJogo.estadio = document.getElementById('stadio').value || "Estádio Municipal";
+        inforJogo.cidade = document.getElementById('city').value || "Cachoeira / BA";
+        inforJogo.informes = document.getElementById('texto-informes').value || "Lorem ipsum dolor sit amet, consectetur adipiscing elit.";
+        sync();
+    }
+
+</script>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./stylectl.css">
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    <script src="./scriptctl.js"></script>
+
+
+    <title>Controle de Placar EOP</title>
+
+</head>
+
+<body>
+    <!-- Config Controle Placar -->
+    <div id="tab-config-placar" class="conteudo">
+
+        <div id="displayCronometro">00:00</div>
+        <button id="btnPlay" class="btn-start" onclick="alternarCronometro()">Iniciar</button>
+        <button class="btn-start" style="background: #dc3545;" onclick="resetarCronometro()" style="width: 100%;">Zerar
+            o Cronômetro</button>
+
+        <div class="placar-set">
+            <div class="time-box">
+                <strong id="nomeTimeA">Time A</strong><br>
+                <div class="-move-score-casa">
+                    <button class="btn-gols" onclick="mudarGols('golsA', 1)">+</button>
+                    <strong id="golsAA">0</strong>
+                    <button class="btn-danger" onclick="mudarGols('golsA', -1)">-</button>
+                </div>
+            </div>
+            <div class="time-box">
+                <strong id="nomeTimeB">Time B</strong><br>
+                <div class="-move-score-visitante">
+                    <button class="btn-gols" onclick="mudarGols('golsB', 1)">+</button>
+                    <strong id="golsBB">0</strong>
+                    <button class="btn-danger" onclick="mudarGols('golsB', -1)">-</button>
+                </div>
+            </div>
+
+            <hr>
+            <hr>
+            <input type="text" id="inputA" placeholder="Nome Time Casa">
+            <input type="text" id="inputB" placeholder="Nome Time Visitante">
+            <div class="label-button">
+                <label>Tempo do Jogo: <select id="tempoJogo">
+                        <option value="1T">1º Tempo</option>
+                        <option value="2T">2º Tempo</option>
+                    </select>
+                </label>
+                <input type="number" id="inputAcrescimo" placeholder="Minutos de Acréscimo">
+            </div>
+            <button onclick="atualizarNomesEAcrescimo()"
+                style="width:100%; background: #6c757d; color: white;">Atualizar
+                Nomes / Acréscimo</button>
+            <button class="button-end" onclick="toggleAcrescimo(true)" style="background: #06e711;">Mostrar
+                Acréscimo</button>
+            <button class="button-end" onclick="toggleAcrescimo(false)" style="background: #ffc107;">Esconder</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

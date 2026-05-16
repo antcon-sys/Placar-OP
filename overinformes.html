@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+    <title>Overlay Informações</title>
+
+
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: transparent;
+            font-family: 'Roboto', sans-serif;
+            color: white;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            text-transform: uppercase;
+        }
+
+        #informes-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 60%;
+            height: 20vh;
+            background: rgba(10, 10, 10, 0.998);
+            padding: 5px;
+            border-radius: 40px;
+            border-bottom: 5px solid #E65100;
+            border-right: 5px solid #E65100;
+            margin-top: 78vh;
+            max-width: 100%;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            margin: 10px 0 7px;
+            letter-spacing: 3px;
+            color: #ffffff;
+            letter-spacing: 5px;
+        }
+
+        .eventos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #ffffff;
+            letter-spacing: 3px;
+        }
+
+        .teams {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .team-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 5px 2px;
+        }
+
+        .team-name {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            text-transform: uppercase;
+            width: 90%;
+            font-size: 35px;
+            margin-left: 3px;
+            letter-spacing: 1.5px;
+        }
+
+        .shots {
+            display: flex;
+            gap: 12px;
+            flex-grow: 1;
+            justify-content: center;
+        }
+
+        .dot {
+            display: flex;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s;
+        }
+
+        .goal {
+            background: #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+            border-color: #fff;
+            transform: scale(1.1);
+            opacity: .8;
+        }
+
+        .miss {
+            background: #ff0000;
+            box-shadow: 0 0 15px #ff0000;
+            border-color: #fff;
+            opacity: .85;
+        }
+
+        .scoreA1 {
+            width: 50px;
+            font-size: 60px;
+            font-weight: bold;
+            color: #ffff00;
+            text-align: center;
+            padding: 2px 7px 2px;
+            margin-left: 15px;
+            border-right: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .scoreB1 {
+            width: 50px;
+            font-size: 60px;
+            font-weight: bold;
+            color: #ffff00;
+            text-align: center;
+            padding: 2px 7px 2px;
+            margin-right: 15px;
+            border-left: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .score-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 2px;
+        }
+
+        .estadios {
+            margin: 2px 0 10px;
+            font-size: 18px;
+            color: #00ff00;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            flex: 1 1 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="informes-container">
+        <div class="header" id="status-header">Em Instantes...</div>
+        <div class="eventos" id="event-jogo">Informações do Jogo</div>
+
+        <div class="teams">
+            <div class="team-row">
+                <div class="team-name" id="display-name-a">TIME A</div>
+                <div class="score-center">
+                    <div class="shots" id="shots-a" ></div>
+                    <div class="scoreA1" id="score-a">0</div>
+                </div>
+            </div>
+            <div class="team-row">
+                <div class="score-center">
+                    <div class="scoreB1" id="score-b">0</div>
+                    <div class="shots" id="shots-b"></div>
+                </div>
+                <div class="team-name" id="display-name-b">TIME B</div>
+            </div>
+        </div>
+
+        <div class="estadios" id="estadios"></div>
+    </div>
+</body>
+
+<script>
+
+    // --- SUA CONFIGURAÇÃO MANTIDA ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyCHKTA-mgIuWcVypfDkGrNhxtsynrUtq1Y",
+        authDomain: "placar-live-53cc0.firebaseapp.com",
+        projectId: "placar-live-53cc0",
+        databaseURL: "https://placar-live-53cc0-default-rtdb.firebaseio.com",
+        storageBucket: "placar-live-53cc0.firebasestorage.app",
+        messagingSenderId: "291622264576",
+        appId: "1:291622264576:web:1ca81d1333e4b0cb7b1de5",
+        measurementId: "G-ZJPHJ42ECV"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    var infoData = "";
+    
+
+    db.ref('placar').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            // Atualização de nomes e gols
+            document.getElementById('display-name-a').innerText = data.timeA || "CASA";
+            document.getElementById('display-name-b').innerText = data.timeB || "VISITANTE";
+
+            //Some com o placar se o informe indicar "Em Instantes" ou "Pré Jogo"
+            db.ref('informesJogo').on('value', (infoJogo) => {
+            infoData = infoJogo.val().sjogo;     
+            console.log("TESTE INFORMES: " + infoData);      
+             if(infoData.toLowerCase().includes("instantes") || infoData.toLowerCase().includes("pré")){   
+                console.log("Em Instantes: " + infoData);
+                document.getElementById('score-a').innerText = "V";
+                document.getElementById('score-b').innerText = "S";
+                document.getElementById('score-a').style.border = "none";
+                document.getElementById('score-b').style.border = "none";
+                document.getElementById('score-a').style.textAlign = "right";
+                document.getElementById('score-b').style.textAlign = "left";
+            } else {
+                 console.log("Placar Regular: " + infoData);
+                document.getElementById('score-b').innerText = data.golsB || 0;
+                document.getElementById('score-a').innerText = data.golsA || 0;
+                 document.getElementById('score-a').style.borderRight = "2px solid rgba(255, 255, 255, 0.3)";
+                document.getElementById('score-b').style.borderLeft = "2px solid rgba(255, 255, 255, 0.3)";
+                document.getElementById('score-a').style.textAlign = "center";
+                document.getElementById('score-b').style.textAlign = "center";
+            }    
+            });
+           
+        }
+    });
+
+    db.ref('informesJogo').on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            document.getElementById('status-header').innerText = data.sjogo;
+            document.getElementById('event-jogo').innerText = data.compet + " - " + data.fase;
+            document.getElementById('estadios').innerText = data.estadio + " - " + data.cidade;
+            document.getElementById('texto-informes').value = data.informes;
+        }
+    });
+   
+
+</script>
+
+</html>
