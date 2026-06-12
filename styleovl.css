@@ -18,51 +18,65 @@ body {
     display: flex;
     align-items: center;
     background: rgba(10, 10, 10, 0.995);
-    border-radius: 12px;
+    border-radius: 25px;
     width: fit-content;
     height: 75px;
     padding: 5px;
     margin: 5vh 0 0 2vw;
-    border-bottom: 5px solid #E65100;
-    border-right: 5px solid #E65100;
+    border-bottom: 6px solid #E65100;
+    border-right: 6px solid #E65100;
+    border-left: 6px solid #E65100;
 }
 
 .time-nome {
     padding: 0 10px;
-    font-size: 26px;
+    font-size: 35px;
     text-transform: uppercase;
+    min-width: 120px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .gols {
-    background: rgba(10, 10, 10, 0.8);
-    font-size: 45px;
+    background: rgba(59, 59, 59, 0.75);
+    font-size: 55px;
     padding: 0 10px;
-    color: #f1c40f;
+    color: #f0e008;
     font-weight: bold;
+    text-align: center;
+    min-width: 50px;
+    border-radius: 15px;
+    margin:2px 4px;
 }
 
 #tempo {
-    font-size: 30px;
-    margin-right: 10px;
-    font-weight: normal;
+    font-size: 32px;
+    margin-right: 8px;
+    font-weight: 500;
 }
 
 .tempo-box {
-    padding: 0 12px;
-    font-size: 40px;
+    padding: 0 7px;
+    font-size: 42px;
     font-weight: bold;
-    border-left: 1px solid #444;
     min-width: 70px;
+    height: 60px;
     text-align: center;
+    background: rgba(255, 255, 255, 0.82);
+    color: #000;
+    border-radius: 15px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 #acrescimo {
     color: #dc3545;
     font-weight: bold;
-    font-size: 38px;
+    font-size: 40px;
     margin-left: 5px;
     display: none;
-    background: #f3e9e9;
-    padding: 0 7px;
-    border-radius: 8px;
+    background: rgba(151, 150, 151, 0.45);
+    padding: 0 8px;
+    border-radius: 15px;
 }

@@ -33,13 +33,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 60%;
-            height: 20vh;
-            background: rgba(10, 10, 10, 0.998);
+            width: 50%;
+            max-height: 15vh;
+            background: rgba(10, 10, 10, 0.90);
             padding: 5px;
-            border-radius: 40px;
-            border-bottom: 5px solid #E65100;
-            border-right: 5px solid #E65100;
+            border-radius: 50px;
+            border-bottom: 7px solid #E65100;
+            border-right: 7px solid #E65100;
+            border-left: 7px solid #E65100;
             margin-top: 78vh;
             max-width: 100%;
         }
@@ -48,9 +49,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 40px;
+            font-size: 32px;
             font-weight: bold;
-            margin: 10px 0 7px;
+            margin: 5px 0 5px;
             letter-spacing: 3px;
             color: #ffffff;
             letter-spacing: 5px;
@@ -60,7 +61,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2em;
+            font-size: 18px;
             color: #ffffff;
             letter-spacing: 3px;
         }
@@ -75,8 +76,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            margin: 5px 2px;
+            gap: 5px;
+            margin: auto 0;
         }
 
         .team-name {
@@ -85,15 +86,16 @@
             align-items: center;
             text-align: center;
             text-transform: uppercase;
-            width: 90%;
-            font-size: 35px;
+            max-width: 90%;
+            font-size: 50px;
             margin-left: 3px;
+            font-weight: bold;
             letter-spacing: 1.5px;
         }
 
         .shots {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-grow: 1;
             justify-content: center;
         }
@@ -132,7 +134,7 @@
             text-align: center;
             padding: 2px 7px 2px;
             margin-left: 15px;
-            border-right: 2px solid rgba(255, 255, 255, 0.3);
+            /*border-right: 2px solid rgba(255, 255, 255, 0.3);*/
         }
 
         .scoreB1 {
@@ -143,7 +145,7 @@
             text-align: center;
             padding: 2px 7px 2px;
             margin-right: 15px;
-            border-left: 2px solid rgba(255, 255, 255, 0.3);
+           /* border-left: 2px solid rgba(255, 255, 255, 0.3);*/
         }
 
         .score-center {
@@ -154,29 +156,46 @@
         }
 
         .estadios {
-            margin: 2px 0 10px;
+            margin: 3px 0 2px;
             font-size: 18px;
             color: #00ff00;
             letter-spacing: 4px;
             text-transform: uppercase;
             flex: 1 1 auto;
         }
+
+        #texto-informes {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            }
+
     </style>
 </head>
 
 <body>
     <div id="informes-container">
         <div class="header" id="status-header">Em Instantes...</div>
-        <div class="eventos" id="event-jogo">Informações do Jogo</div>
+        <div id="texto-informes">
+            <div class="eventos" id="event-jogo">Informações do Jogo</div>
+            <div class="estadios" id="estadios"></div>
+        </div>
 
         <div class="teams">
             <div class="team-row">
                 <div class="team-name" id="display-name-a">TIME A</div>
                 <div class="score-center">
-                    <div class="shots" id="shots-a" ></div>
+                    <div class="shots" id="shots-a"></div>
                     <div class="scoreA1" id="score-a">0</div>
                 </div>
             </div>
+            
+            <div>
+                <img src="./img/Logo IB SF 2025.png" alt="VS" class="image-vs" style="width:60px;">
+            </div>
+            
             <div class="team-row">
                 <div class="score-center">
                     <div class="scoreB1" id="score-b">0</div>
@@ -186,7 +205,7 @@
             </div>
         </div>
 
-        <div class="estadios" id="estadios"></div>
+
     </div>
 </body>
 
@@ -207,7 +226,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     var infoData = "";
-    
+
 
     db.ref('placar').on('value', (snapshot) => {
         const data = snapshot.val();
@@ -218,27 +237,27 @@
 
             //Some com o placar se o informe indicar "Em Instantes" ou "Pré Jogo"
             db.ref('informesJogo').on('value', (infoJogo) => {
-            infoData = infoJogo.val().sjogo;     
-            console.log("TESTE INFORMES: " + infoData);      
-             if(infoData.toLowerCase().includes("instantes") || infoData.toLowerCase().includes("pré")){   
-                console.log("Em Instantes: " + infoData);
-                document.getElementById('score-a').innerText = "V";
-                document.getElementById('score-b').innerText = "S";
-                document.getElementById('score-a').style.border = "none";
-                document.getElementById('score-b').style.border = "none";
-                document.getElementById('score-a').style.textAlign = "right";
-                document.getElementById('score-b').style.textAlign = "left";
-            } else {
-                 console.log("Placar Regular: " + infoData);
-                document.getElementById('score-b').innerText = data.golsB || 0;
-                document.getElementById('score-a').innerText = data.golsA || 0;
-                 document.getElementById('score-a').style.borderRight = "2px solid rgba(255, 255, 255, 0.3)";
-                document.getElementById('score-b').style.borderLeft = "2px solid rgba(255, 255, 255, 0.3)";
-                document.getElementById('score-a').style.textAlign = "center";
-                document.getElementById('score-b').style.textAlign = "center";
-            }    
+                infoData = infoJogo.val().sjogo;
+                console.log("TESTE INFORMES: " + infoData);
+                if (infoData.toLowerCase().includes("instantes") || infoData.toLowerCase().includes("pré")) {
+                    console.log("Em Instantes: " + infoData);
+                    document.getElementById('score-a').innerText = "";
+                    document.getElementById('score-b').innerText = "";
+                    document.getElementById('score-a').style.border = "none";
+                    document.getElementById('score-b').style.border = "none";
+                    document.getElementById('score-a').style.textAlign = "right";
+                    document.getElementById('score-b').style.textAlign = "left";
+                } else {
+                    console.log("Placar Regular: " + infoData);
+                    document.getElementById('score-b').innerText = data.golsB || 0;
+                    document.getElementById('score-a').innerText = data.golsA || 0;
+                    //document.getElementById('score-a').style.borderRight = "2px solid rgba(255, 255, 255, 0.3)";//
+                    //document.getElementById('score-b').style.borderLeft = "2px solid rgba(255, 255, 255, 0.3)";//
+                    //document.getElementById('score-a').style.textAlign = "center";
+                    //document.getElementById('score-b').style.textAlign = "center";//
+                }
             });
-           
+
         }
     });
 
@@ -251,8 +270,8 @@
             document.getElementById('texto-informes').value = data.informes;
         }
     });
-   
 
+ 
 </script>
 
 </html>
