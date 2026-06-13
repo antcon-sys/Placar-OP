@@ -52,9 +52,8 @@
             font-size: 32px;
             font-weight: bold;
             margin: 5px 0 5px;
-            letter-spacing: 3px;
-            color: #ffffff;
             letter-spacing: 5px;
+            color: #ffffff;
         }
 
         .eventos {
@@ -70,13 +69,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 2px;
         }
 
         .team-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
             margin: auto 0;
         }
 
@@ -86,16 +85,16 @@
             align-items: center;
             text-align: center;
             text-transform: uppercase;
-            max-width: 90%;
+            min-width: 230px;
+            max-width: 95%;
             font-size: 50px;
-            margin-left: 3px;
             font-weight: bold;
             letter-spacing: 1.5px;
         }
 
-        .shots {
+        /*.shots {
             display: flex;
-            gap: 10px;
+            gap: 5px;
             flex-grow: 1;
             justify-content: center;
         }
@@ -124,7 +123,7 @@
             box-shadow: 0 0 15px #ff0000;
             border-color: #fff;
             opacity: .85;
-        }
+        }*/
 
         .scoreA1 {
             width: 50px;
@@ -145,7 +144,7 @@
             text-align: center;
             padding: 2px 7px 2px;
             margin-right: 15px;
-           /* border-left: 2px solid rgba(255, 255, 255, 0.3);*/
+            /* border-left: 2px solid rgba(255, 255, 255, 0.3);*/
         }
 
         .score-center {
@@ -170,8 +169,23 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            }
+        }
 
+        .image-vs {
+            width: 80px;
+            height: 70px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-ta,
+        .image-tb {
+            width: 70px;
+            display: flex;
+            justify-content: center;
+            margin: 2px 10px;
+        }
     </style>
 </head>
 
@@ -184,25 +198,27 @@
         </div>
 
         <div class="teams">
+            <img src="./img/São Jorge-500px.png" alt="Imagem Time A" class="image-ta" />
             <div class="team-row">
                 <div class="team-name" id="display-name-a">TIME A</div>
                 <div class="score-center">
-                    <div class="shots" id="shots-a"></div>
+                    <!-- <div class="shots" id="shots-a"></div> -->
                     <div class="scoreA1" id="score-a">0</div>
                 </div>
             </div>
-            
+
             <div>
-                <img src="./img/Logo IB SF 2025.png" alt="VS" class="image-vs" style="width:60px;">
+                <img src="./img/IB 26-500px.png" alt="VS" class="image-vs" />
             </div>
-            
+
             <div class="team-row">
                 <div class="score-center">
                     <div class="scoreB1" id="score-b">0</div>
-                    <div class="shots" id="shots-b"></div>
+                    <!-- <div class="shots" id="shots-b"></div> -->
                 </div>
                 <div class="team-name" id="display-name-b">TIME B</div>
             </div>
+            <img src="./img/Vila-500px.png" alt="Imagem Time B" class="image-tb" />
         </div>
 
 
@@ -243,10 +259,10 @@
                     console.log("Em Instantes: " + infoData);
                     document.getElementById('score-a').innerText = "";
                     document.getElementById('score-b').innerText = "";
-                   // document.getElementById('score-a').style.border = "none";
-                   // document.getElementById('score-b').style.border = "none";
-                   // document.getElementById('score-a').style.textAlign = "right";
-                   // document.getElementById('score-b').style.textAlign = "left";//
+                    // document.getElementById('score-a').style.border = "none";
+                    // document.getElementById('score-b').style.border = "none";
+                    // document.getElementById('score-a').style.textAlign = "right";
+                    // document.getElementById('score-b').style.textAlign = "left";//
                 } else {
                     console.log("Placar Regular: " + infoData);
                     document.getElementById('score-b').innerText = data.golsB || 0;
@@ -271,7 +287,7 @@
         }
     });
 
- 
+
 </script>
 
 </html>
