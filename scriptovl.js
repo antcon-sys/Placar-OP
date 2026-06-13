@@ -49,8 +49,10 @@ db.ref('placar').on('value', (snapshot) => {
         if (data.mostrarAcrescimo && data.minutosAcrescimo > 0) {
             acrescimoEl.style.display = "inline";
             acrescimoEl.innerText = "+" + data.minutosAcrescimo;
+            document.getElementById('container-placar').style.gridTemplateColumns = "1fr 1.25fr";
         } else {
             acrescimoEl.style.display = "none";
+            document.getElementById('container-placar').style.gridTemplateColumns = "1fr 1fr";
         }
     }
 });
@@ -62,4 +64,26 @@ function exibirTempo(s) {
     const seg = (s % 60).toString().padStart(2, '0');
     document.getElementById('periodo').innerText = min + ":" + seg;
 }
+
+// Função para atualizar os cartões na interface do OBS
+function atualizarInterfaceCartoes(time, quantidade) {
+    const container = document.getElementById(`cartoes-time-${time}`);
+    container.innerHTML = ''; // Limpa os antigos
+
+    for (let i = 0; i < quantidade; i++) {
+        const novoCartao = document.createElement('div');
+        novoCartao.classList.add('mini-cartao-vermelho');
+        container.appendChild(novoCartao);
+    }
+}
+
+// ESCUTA EM TEMPO REAL: Se mudar no Firebase, atualiza a tela do OBS na hora
+db.ref('placar').on('value', (snapshot) => {
+    const dados = snapshot.val();
+    if (dados) {
+        atualizarInterfaceCartoes('A', dados.cartoesA || 0);
+        atualizarInterfaceCartoes('B', dados.cartoesB || 0);
+    }
+});
+
 

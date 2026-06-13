@@ -29,6 +29,7 @@
             o Cronômetro</button>
 
         <div class="placar-set">
+
             <div class="time-box">
                 <strong id="nomeTimeA">Time A</strong><br>
                 <div class="-move-score-casa">
@@ -36,13 +37,24 @@
                     <strong id="golsAA">0</strong>
                     <button class="btn-danger" onclick="mudarGols('golsA', -1)">-</button>
                 </div>
+                <div class="bloco">
+                    <button class="add" onclick="alterarCartao('cartoesA', 1)">+ Cartão</button>
+                    <button class="rem" onclick="alterarCartao('cartoesA', -1)">- Remover</button>
+                    <p id="qtd-A">Cartões Vermelhos: 0</p>
+                </div>
             </div>
+
             <div class="time-box">
                 <strong id="nomeTimeB">Time B</strong><br>
                 <div class="-move-score-visitante">
                     <button class="btn-gols" onclick="mudarGols('golsB', 1)">+</button>
                     <strong id="golsBB">0</strong>
                     <button class="btn-danger" onclick="mudarGols('golsB', -1)">-</button>
+                </div>
+                <div class="bloco">
+                    <button class="add" onclick="alterarCartao('cartoesB', 1)">+ Cartão</button>
+                    <button class="rem" onclick="alterarCartao('cartoesB', -1)">- Remover</button>
+                    <p id="qtd-B">Cartões Vermelhos: 0</p>
                 </div>
             </div>
 

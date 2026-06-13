@@ -188,6 +188,33 @@ button:active {
     opacity: 0.5;
 }
 
+.bloco {
+    display: block;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 8px;
+    max-width: 280px;
+    align-items: center;
+}
+
+/*button { padding: 10px; font-weight: bold; margin: 5px; width: 100%; cursor: pointer; border-radius: 5px; border: none; }*/
+.add {
+    background: #28a745;
+    color: white;
+}
+
+.rem {
+    background: #dc3545;
+    color: white;
+}
+
+#qtd-A,
+#qtd-B {
+    font-size: 22px;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 1075px) {
 
     #tab-config-placar,

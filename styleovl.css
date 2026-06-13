@@ -14,15 +14,21 @@ body {
     height: 100vh;
 }
 
+.container-placar-principal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .placar-container {
     display: flex;
+    position: relative;
     align-items: center;
     background: rgba(10, 10, 10, 0.995);
-    border-radius: 25px;
+    border-radius: 35px;
     width: fit-content;
-    height: 75px;
+    height: 7vh;
     padding: 5px;
-    margin: 5vh 0 0 2vw;
+    margin-left: 5vh;
     border-bottom: 6px solid #E65100;
     border-right: 6px solid #E65100;
     border-left: 6px solid #E65100;
@@ -32,39 +38,56 @@ body {
     padding: 0 10px;
     font-size: 35px;
     text-transform: uppercase;
-    min-width: 120px;
+    min-width: 150px;
     text-align: center;
     font-weight: bold;
+    margin: auto 5px;
+}
+
+.golsS {
+    display: flex;
+    max-width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.vs-image {
+    max-width: 60px;
+    margin: 0 auto;
 }
 
 .gols {
     background: rgba(59, 59, 59, 0.75);
-    font-size: 55px;
-    padding: 0 10px;
+    font-size: 60px;
+    padding: 0 5px;
     color: #f0e008;
     font-weight: bold;
     text-align: center;
-    min-width: 50px;
-    border-radius: 15px;
-    margin:2px 4px;
+    min-width: 60px;
+    height: 55px;
+    border-radius: 20px;
+    margin: auto 0;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
 
 #tempo {
     font-size: 32px;
-    margin-right: 8px;
+    margin-right: 7px;
     font-weight: 500;
 }
 
 .tempo-box {
     padding: 0 7px;
-    font-size: 42px;
+    font-size: 40px;
     font-weight: bold;
     min-width: 70px;
-    height: 60px;
+    height: 55px;
     text-align: center;
     background: rgba(255, 255, 255, 0.82);
     color: #000;
-    border-radius: 15px;
+    border-radius: 20px;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -73,10 +96,50 @@ body {
 #acrescimo {
     color: #dc3545;
     font-weight: bold;
-    font-size: 40px;
+    font-size: 35px;
     margin-left: 5px;
     display: none;
-    background: rgba(151, 150, 151, 0.45);
+    background: rgba(59, 59, 59, 0.25);
     padding: 0 8px;
-    border-radius: 15px;
+    border-radius: 20px;
+}
+
+#cartoes-time-A {
+    display: flex;
+    position: relative;
+    gap: 6px;
+    margin: 4vh 0 2px 25%;
+    min-height: 20px;
+    align-items: center;
+
+}
+
+#cartoes-time-B {
+    display: flex;
+    position: center;
+    gap: 6px;
+    margin: 4vh 0 2px 20%;
+    min-height: 20px;
+    align-items: center;
+}
+
+.mini-cartao-vermelho {
+    width: 12px;
+    height: 18px;
+    background-color: #ff3333;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    animation: surgir 0.2s ease-out forwards;
+}
+
+@keyframes surgir {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }

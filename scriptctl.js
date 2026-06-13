@@ -123,3 +123,32 @@ function atualizarVisor(s) {
     const seg = (total % 60).toString().padStart(2, '0');
     document.getElementById('displayCronometro').innerText = min + ":" + seg;
 }
+
+// Variáveis locais para controle interno de limites
+        let cartoesAa = 0;
+        let cartoesBb = 0;
+
+        // Escuta o banco para manter o controle atualizado caso mude em outro lugar
+        db.ref('placar').on('value', (snapshot) => {
+            const dados = snapshot.val();
+            if(dados) {
+                cartoesAa = dados.cartoesA || 0;
+                cartoesBb = dados.cartoesB || 0;
+                document.getElementById('qtd-A').innerText = `Cartões Vermelhos: ${cartoesAa}`;
+                document.getElementById('qtd-B').innerText = `Cartões Vermelhos: ${cartoesBb}`;
+            }
+        });
+
+        function alterarCartao(time, valor) {
+            let qtdAtual = time === 'cartoesA' ? cartoesAa : cartoesBb;
+            qtdAtual += valor;
+
+            if (qtdAtual < 0) qtdAtual = 0;
+            if (qtdAtual > 6) {
+                alert("Limite de 6 cartões atingido!");
+                return;
+            }
+
+            // Envia o novo valor para o Firebase
+            db.ref(`placar/${time}`).set(qtdAtual);
+        }
