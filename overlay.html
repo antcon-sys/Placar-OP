@@ -19,34 +19,38 @@
 
 <body>
 
-
 <div class="pai-container">
-    <div class="container-placar-principal" id="container-placar">
-        <div>
-        <div id="cartoes-time-A" class="container-cartoes" ></div>
-        </div>
-        <div>
-        <div id="cartoes-time-B" class="container-cartoes"></div>
-        </div>
-    </div>
     <div class="placar-container">
         <div class="placar-box">
 
-        <div id="timeA" class="time-nome">CASA</div>
-
-        <div class="golsS">
-            <div id="golsA" class="gols">0</div>
-            <div>
-                <img src="./img/Jg Amistoso2.png" alt="VS" class="vs-image" />
+            <!-- BLOCO TIME A -->
+            <div class="time-coluna">
+                <div id="cartoes-time-A" class="container-cartoes"></div>
+                <div id="timeA" class="time-nome">CASA</div>
             </div>
-            <div id="golsB" class="gols">0</div>
+
+            <!-- BLOCO PLACAR CENTRAL -->
+            <div class="golsS">
+                <div id="golsA" class="gols">0</div>
+                <div>
+                    <img src="./img/Jg Amistoso2.png" alt="VS" class="vs-image" />
+                </div>
+                <div id="golsB" class="gols">0</div>
+            </div>
+
+            <!-- BLOCO TIME B -->
+            <div class="time-coluna">
+                <div id="cartoes-time-B" class="container-cartoes"></div>
+                <div id="timeB" class="time-nome">VISITANTE</div>
+            </div>
+
         </div>
 
-        <div id="timeB" class="time-nome">VISITANTE</div>
-
-        </div>
+        <!-- TEMPO -->
         <div class="tempo-box">
-            <span id="tempo">1T</span><span id="periodo">00:00</span><span id="acrescimo">+0</span>
+            <span id="tempo">1T</span>
+            <span id="periodo">00:00</span>
+            <span id="acrescimo">+0</span>
         </div>
     </div>
 </div>
