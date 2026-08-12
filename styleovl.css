@@ -39,12 +39,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: 5px;
 }
 
 .time-coluna {
     display: grid;
-    grid-template-rows: 1fr 60px;
+    grid-template-rows: 1fr 6vh;
     /* 1fr = flexível (cresce), 60px = fixa */
 }
 
@@ -67,13 +67,13 @@ body {
 }
 
 .time-nome {
-    padding: 0 10px;
+    padding: 3px 10px;
     font-size: 35px;
     text-transform: uppercase;
-    min-width: 125px;
+    min-width: 100px;
     text-align: center;
     font-weight: bold;
-    margin-bottom: 7px;
+    margin-bottom: 20px;
 }
 
 .golsS {
@@ -84,8 +84,8 @@ body {
 }
 
 .vs-image {
-    max-width: 45px;
-    height: 65px;
+    max-width: 2.7vw;
+    height: 7.5vh;
     margin: 1px 5px;
     display: flex;
     border-radius: 15%;
@@ -95,14 +95,14 @@ body {
 
 .gols {
     background: rgba(59, 59, 59, 0.6);
-    font-size: 60px;
+    font-size: 65px;
     padding: 0 5px;
     color: #f0e008;
     font-weight: bold;
     text-align: center;
     min-width: 60px;
-    height: 55px;
-    border-radius: 20px;
+    height: 60px;
+    border-radius: 15px;
     margin: auto 0;
     align-items: center;
     display: flex;
@@ -110,16 +110,16 @@ body {
 }
 
 #tempo {
-    font-size: 32px;
-    margin-right: 7px;
+    font-size: 28px;
+    margin-right: 5px;
     font-weight: 500;
 }
 
 .tempo-box {
-    padding: 0 7px;
-    font-size: 40px;
+    padding: 0 5px;
+    font-size: 42px;
     font-weight: bold;
-    min-width: 70px;
+    min-width: 60px;
     height: 55px;
     text-align: center;
     background: rgba(255, 255, 255, 0.82);
@@ -133,11 +133,11 @@ body {
 #acrescimo {
     color: #ff3333;
     font-weight: 500;
-    font-size: 36px;
-    margin-left: 5px;
+    font-size: 30px;
+    margin-left: 4px;
     display: none;
     background: rgba(0, 0, 0, 0.85);
-    padding: 0 8px;
+    padding: 0 5px;
     border-radius: 12px;
     }
 
