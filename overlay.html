@@ -19,41 +19,50 @@
 
 <body>
 
-<div class="pai-container">
-    <div class="placar-container">
-        <div class="placar-box">
+    <div class="pai-container">
+        <div class="placar-container">
+            <div class="placar-box">
 
-            <!-- BLOCO TIME A -->
-            <div class="time-coluna">
-                <div id="cartoes-time-A" class="container-cartoes"></div>
-                <div id="timeA" class="time-nome">CASA</div>
-            </div>
-
-            <!-- BLOCO PLACAR CENTRAL -->
-            <div class="golsS">
-                <div id="golsA" class="gols">0</div>
-                <div>
-                    <img src="./img/Logo Inter 26.png" alt="VS" class="vs-image" />
+                <!-- BLOCO TIME A -->
+                <div class="time-coluna">
+                    <div id="cartoes-time-A" class="container-cartoes"></div>
+                    <!-- Exemplo para o Time A -->
+                    <div class="time-nome-wrapper">
+                        <div id="timeA" class="time-nome time-texto ativo">CASA</div>
+                        <div id="siglaA" class="time-nome time-texto">ABR A</div>
+                    </div>
                 </div>
-                <div id="golsB" class="gols">0</div>
+
+                <!-- BLOCO PLACAR CENTRAL -->
+                <div class="golsS">
+                    <div id="golsA" class="gols">0</div>
+                    <div>
+                        <img src="./img/Logo Inter 26.png" alt="VS" class="vs-image" />
+                    </div>
+                    <div id="golsB" class="gols">0</div>
+
+                </div>
+
+                <!-- BLOCO TIME B -->
+                <div class="time-coluna">
+                    <div id="cartoes-time-B" class="container-cartoes"></div>
+                    <!-- Exemplo para o Time B -->
+                    <div class="time-nome-wrapper">
+                        <div id="timeB" class="time-nome time-texto ativo">VISITANTE</div>
+                        <div id="siglaB" class="time-nome time-texto">ABR B</div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- BLOCO TIME B -->
-            <div class="time-coluna">
-                <div id="cartoes-time-B" class="container-cartoes"></div>
-                <div id="timeB" class="time-nome">VISITANTE</div>
+            <!-- TEMPO -->
+            <div class="tempo-box">
+                <span id="tempo">1T</span>
+                <span id="periodo">00:00</span>
+                <span id="acrescimo">+0</span>
             </div>
-
-        </div>
-
-        <!-- TEMPO -->
-        <div class="tempo-box">
-            <span id="tempo">1T</span>
-            <span id="periodo">00:00</span>
-            <span id="acrescimo">+0</span>
         </div>
     </div>
-</div>
 
 </body>
 

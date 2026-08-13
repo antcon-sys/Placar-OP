@@ -20,8 +20,10 @@ db.ref('placar').on('value', (snapshot) => {
     if (data) {
         // Atualização de nomes e gols
         document.getElementById('timeA').innerText = data.timeA || "CASA";
+        document.getElementById('siglaA').innerText = data.sigtimeA || "ABR A";
         document.getElementById('golsA').innerText = data.golsA || 0;
         document.getElementById('timeB').innerText = data.timeB || "VISITANTE";
+        document.getElementById('siglaB').innerText = data.sigtimeB || "ABR B";
         document.getElementById('golsB').innerText = data.golsB || 0;
         document.getElementById('tempo').innerText = data.tempo || "1T";
 
@@ -41,7 +43,8 @@ db.ref('placar').on('value', (snapshot) => {
             }, 1000);
         } else {
             // Se estiver pausado, apenas exibe o tempo parado que está no banco
-            exibirTempo(data.segundos || 0);
+            const totalSegundos = data.segundos || 0;
+            exibirTempo(totalSegundos);
         }
 
         // Acréscimos
@@ -52,14 +55,58 @@ db.ref('placar').on('value', (snapshot) => {
             document.getElementById('container-placar').style.gridTemplateColumns = "1fr 1.25fr";
         } else {
             acrescimoEl.style.display = "none";
+            acrescimoEl.innerText = "";
             document.getElementById('container-placar').style.gridTemplateColumns = "1fr 1fr";
         }
+
+        /* // Cartões
+         atualizarInterfaceCartoes('A', data.cartoesA || 0);
+         atualizarInterfaceCartoes('B', data.cartoesB || 0);*/
     }
 });
 
-// Função auxiliar para formatar MM:SS
+// Função para controlar a transição fade via classes CSS
+function alternarVisualizacaoTimes(mostrarNome) {
+    const timeA = document.getElementById('timeA');
+    const siglaA = document.getElementById('siglaA');
+    const timeB = document.getElementById('timeB');
+    const siglaB = document.getElementById('siglaB');
+
+    if (mostrarNome) {
+        timeA?.classList.add('ativo');
+        siglaA?.classList.remove('ativo');
+        timeB?.classList.add('ativo');
+        siglaB?.classList.remove('ativo');
+    } else {
+        timeA?.classList.remove('ativo');
+        siglaA?.classList.add('ativo');
+        timeB?.classList.remove('ativo');
+        siglaB?.classList.add('ativo');
+    }
+}
+
+// Função auxiliar para formatar MM:SS e alternar nomes/siglas
 function exibirTempo(s) {
     if (s < 0) s = 0; // Evita tempos negativos por delay de sync
+
+    // 1. Alternância dos nomes dos times baseada no tempo percorrido
+    if (s < 10) {
+        // Primeiros 10 segundos: exibe Nomes Completos
+        alternarVisualizacaoTimes(true);
+    } else {
+        // Após 15s, cria ciclos regulares de 300 segundos (5 minutos)
+        // Calcula a posição do segundo atual dentro da janela de 5 minutos
+        const cicloSegundos = (s - 15) % 300;
+
+        // Nos primeiros 15 segundos de cada ciclo de 5 minutos, exibe Nomes Completos; no restante, Siglas
+        if (cicloSegundos < 15) {
+            alternarVisualizacaoTimes(true);
+        } else {
+            alternarVisualizacaoTimes(false);
+        }
+    }
+
+    // 2. Formatação do Cronômetro
     const min = Math.floor(s / 60).toString().padStart(2, '0');
     const seg = (s % 60).toString().padStart(2, '0');
     document.getElementById('periodo').innerText = min + ":" + seg;
@@ -85,5 +132,4 @@ db.ref('placar').on('value', (snapshot) => {
         atualizarInterfaceCartoes('B', dados.cartoesB || 0);
     }
 });
-
 

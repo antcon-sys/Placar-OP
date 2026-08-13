@@ -14,11 +14,6 @@ body {
     height: 100vh;
 }
 
-/*.container-placar-principal {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}*/
-
 .placar-container {
     display: flex;
     position: relative;
@@ -27,9 +22,12 @@ body {
     border-radius: 35px;
     width: fit-content;
     height: 7vh;
+    /* Mudado de height para min-height */
     padding: 5px;
-    margin-left: 5vh;
-    margin-top: 4vw;
+    /* Aumentado levemente para dar respiro ao texto de 35px */
+    margin-left: 4vh;
+    margin-top: 3vw;
+    border-top: 2px solid #E65100;
     border-bottom: 6px solid #E65100;
     border-right: 6px solid #E65100;
     border-left: 6px solid #E65100;
@@ -40,40 +38,68 @@ body {
     align-items: center;
     justify-content: center;
     gap: 5px;
+    max-width: 100%;
 }
 
 .time-coluna {
-    display: grid;
-    grid-template-rows: 1fr 6vh;
-    /* 1fr = flexível (cresce), 60px = fixa */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .container-cartoes {
     display: flex;
-    gap: 5px;
-    min-height: 25px;
+    gap: 6px;
+    min-height: 20px;
     align-items: center;
     justify-content: center;
 }
 
 .mini-cartao-vermelho {
-
     width: 10px;
-    height: 20px;
+    height: 26px;
     background-color: #ff3333;
-    border-radius: 3px;
+    border-radius: 5px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-    animation: surgir 0.2s ease-out forwards;
+    animation: surgir 0.3s ease-out forwards;
 }
 
-.time-nome {
-    padding: 3px 10px;
+/* O wrapper vira um Grid que centraliza e expande com o conteúdo */
+.time-nome-wrapper {
+    display: inline-grid;
+    grid-template-areas: "overlap";
+    align-items: center;
+    justify-items: center;
+    min-width: 120px;
+    width: fit-content;
+    /* Força o wrapper a ter a largura do maior texto */
+}
+
+/* Todos os filhos ficam na mesma área do Grid (um em cima do outro) */
+.time-texto {
+    grid-area: overlap;
+    /* Sobrepõe sem precisar de position: absolute */
+    white-space: nowrap;
+
+    padding: 3px 7px;
     font-size: 35px;
     text-transform: uppercase;
-    min-width: 100px;
     text-align: center;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+/* Classe ativa enviada pelo JavaScript */
+.time-texto.ativo {
+    display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
 .golsS {
@@ -94,6 +120,7 @@ body {
 }
 
 .gols {
+    display: flex;
     background: rgba(59, 59, 59, 0.6);
     font-size: 65px;
     padding: 0 5px;
@@ -105,9 +132,8 @@ body {
     border-radius: 15px;
     margin: auto 0;
     align-items: center;
-    display: flex;
     justify-content: center;
-}
+    }
 
 #tempo {
     font-size: 28px;
@@ -139,7 +165,7 @@ body {
     background: rgba(0, 0, 0, 0.85);
     padding: 0 5px;
     border-radius: 12px;
-    }
+}
 
 
 @keyframes surgir {

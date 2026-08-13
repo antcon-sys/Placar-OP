@@ -31,6 +31,8 @@ placarRef.on('value', (snapshot) => {
 
         document.getElementById('nomeTimeA').innerText = data.timeA || "Time A";
         document.getElementById('nomeTimeB').innerText = data.timeB || "Time B";
+        document.getElementById('siglaTimeA').innerText = data.sigtimeA || "Abreviação A";
+        document.getElementById('siglaTimeB').innerText = data.sigtimeB || "Abreviação B";
         document.getElementById('golsAA').innerText = data.golsA || 0;
         document.getElementById('golsBB').innerText = data.golsB || 0;
 
@@ -103,11 +105,15 @@ function mudarGols(campo, valor) {
 function atualizarNomesEAcrescimo() {
     const nA = document.getElementById('inputA').value;
     const nB = document.getElementById('inputB').value;
+    const sA = document.getElementById('siglaA').value;
+    const sB = document.getElementById('siglaB').value;
     const nC = document.getElementById('tempoJogo').value;
     const ac = document.getElementById('inputAcrescimo').value;
     const updates = {};
     if (nA) updates.timeA = nA;
     if (nB) updates.timeB = nB;
+    if (sA) updates.sigtimeA = sA;
+    if (sB) updates.sigtimeB = sB;    
     if (nC) updates.tempo = nC;
     if (ac) updates.minutosAcrescimo = ac;
     placarRef.update(updates);

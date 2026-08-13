@@ -161,10 +161,13 @@ label {
 }
 
 #nomeTimeA,
-#nomeTimeB {
+#nomeTimeB,
+#siglaTimeA,
+#siglaTimeB {
     font-size: 22px;
     width: 90%;
     padding: 5px 0;
+    text-transform: uppercase;
 }
 
 #golsAA,
